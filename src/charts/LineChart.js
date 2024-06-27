@@ -38,12 +38,20 @@ let dataChart
   var data = {
     labels: dataChart?.map(x => Date.now().toString() ),
     datasets: [{
-      label: 'My First Dataset',
-      data: dataChart?.map(x => x.var_1),
+      label: 'var_2',
+      data: dataChart?.map(x => x.var_2),
       fill: false,
     borderColor: 'rgb(75, 192, 192)',
     tension: 0.1
-    }]
+    },
+    {
+      label: 'var_1',
+      data: dataChart?.map(x => x.var_1),
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      tension: 0.1,
+    },
+  ]
   };
 
   var options = {
@@ -67,6 +75,8 @@ let dataChart
       <Line
         data={data}
         height={1000}
+        width={2000}
+        
         options={options}
 
       />

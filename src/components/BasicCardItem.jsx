@@ -22,7 +22,7 @@ function BasicCardItem({ sensorItemProps }) {
   };
 
   return (
-    <Card sx={{ minWidth: 275, margin: 3 }}>
+    <Card sx={{ minWidth: 275, margin: 3, alignContent:'center' }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="red" gutterBottom>
           {sensorItemProps.Station_alarm}

@@ -29,13 +29,10 @@ function TrendsPage() {
     }, [data])
 
     return (
-        <div className='App'>
-            <h1>
-                Trends
-            </h1>
-            <h2>
-                  {JSON.stringify(sensorItem)}
-            </h2>
+        <div className='App-header'>
+            <h3>
+                Тренды {sensorItem.Station_name} / Номер:  {sensorItem.Station_num}
+            </h3>
             <LineChart plcData={ data }/>
         </div>
 

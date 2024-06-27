@@ -5,7 +5,7 @@ function MoreDetails() {
   const location = useLocation();
   const sensorItem = location.state?.sensorItemProps;
   return (
-    <div className='App'>
+    <div className='App-header'>
     <h1>
         Details information
     </h1>

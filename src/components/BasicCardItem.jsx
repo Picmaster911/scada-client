@@ -28,9 +28,6 @@ function BasicCardItem({ sensorItemProps }) {
           {sensorItemProps.Station_alarm}
         </Typography>
         <Typography variant="h5" component="div">
-          <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>
-            КНФС
-          </Box>
           <Box>
             {sensorItemProps.Station_name}
           </Box>

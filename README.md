@@ -1,24 +1,3 @@
-scp -r D:\scada-client\build\*  user@192.168.0.231:\home\user\scada-serv2\public
-
-===========================================================================================
-scp -r C:\Users\dandr\scada-client\build\*  user@192.168.0.231:\var\www\scada-client\
-
-sudo a2ensite scada-client.conf
-service apache2 reload
-sudo a2dissite scada-client.conf
-
-===========================================================================================
-192.168.0.231
-SSH - user:user1234
-scada.asuscomm.com/phpmyadmin - phpmyadmin:mysql1234
-scada.asuscomm.com/wp-admin - Andrey:user1234
-
-scada.asuscomm.com:8081 - scada-client
-===========================================================================================
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:

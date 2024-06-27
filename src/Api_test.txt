@@ -1,0 +1,84 @@
+//https://builtin.com/software-engineering-perspectives/react-api
+
+// function App() {
+//   const [data, setData] = useState(null);
+//   function handleClick() {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('GET', 'http://192.168.0.138:8082');
+//     xhr.onload = function() {
+//       if (xhr.status === 200) {
+//         setData(JSON.parse(xhr.responseText));
+//       }
+//     };
+//     xhr.send();
+//   }
+//   return (
+//     <div>
+//       <button onClick={handleClick}>Get Data</button>
+//       {data ? <div>{JSON.stringify(data)}</div> : <div>Loading...</div>}
+//     </div>
+//   );
+// }
+
+// function App() {
+//   const [data, setData] = useState(null);
+//   useEffect(() => {
+//     fetch('http://192.168.0.231:8082')
+//       .then(response => response.json())
+//       .then(json => {
+//         setData(json);
+//         Station_num[0] = json[0].Station_num;
+//         Station_status[0] = json[0].Station_status;
+//         Station_alarm[0] = json[0].Station_alarm;
+//         Station_SV[0] = json[0].Station_SV;
+//         Station_PV[0] = json[0].Station_PV;
+//         Station_PWM[0] = json[0].Station_PWM;
+//         Station_PV2[0] = json[0].Station_PV2;
+//       })
+//       .catch(error => console.error(error));
+//   }, []);
+//   // return (
+//   //   <div>
+//   //     {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : 'Loading...'}
+//   //   </div>
+//   // );
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <p>SCADA ПНС</p>
+//         <BasicCard num={0} />
+//         <br />
+//         <BasicCard num={1} />
+//         <br />
+//         <img src={logo} className="App-logo" alt="logo" />
+//       </header>
+//     </div>
+//   );
+// }
+
+// function App() {
+//   const [posts, setPosts] = useState([]);
+//   useEffect(() => {
+//     axios.get('http://192.168.0.231:8082')
+//       .then(response => {
+//         setPosts(response.data);
+//         Station_num[0] = posts.at(0).Station_num;
+//         Station_status[0] = posts.at(0).Station_status;
+//         Station_alarm[0] = posts.at(0).Station_alarm;
+//         Station_SV[0] = posts.at(0).Station_SV;
+//         Station_PV[0] = posts.at(0).Station_PV;
+//         Station_PWM[0] = posts.at(0).Station_PWM;
+//         Station_PV2[0] = posts.at(0).Station_PV2;
+//       })
+//       .catch(error => {
+//         console.error(error);
+//       });
+//   }, []);
+//   return (
+//     <ul>
+//       {posts.map(post => (
+//         <li key={post.Station_num}>{post.Station_status} {post.Station_SV} {post.Station_PV}  {post.Station_PWM}</li>
+//       ))}
+//     </ul>
+//   );
+// }

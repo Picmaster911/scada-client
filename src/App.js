@@ -9,7 +9,7 @@ import TrendsPage from './pages/TrendsPage';
 function App() {
 
   return (
-    <div className="App">
+    <div className="App-header">
       <Router>
         <Routes>
           <Route exact path='/' element={<MainPage />} />

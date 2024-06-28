@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import LineChart from '../charts/LineChart';
+import { Button } from '@mui/material';
 
 function TrendsPage() {
     const location = useLocation();
     const sensorItem = location.state?.sensorItemProps;
     const [data, setData] = useState(null);
+    const navigate = useNavigate();
+
+    const GoToPageHome = () => { navigate('/') };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,10 +32,12 @@ function TrendsPage() {
     useEffect(() => {
     }, [data])
 
+    
     return (
         <div className='App-header'>
-            <h3>
-                Тренды {sensorItem.Station_name} / Номер:  {sensorItem.Station_num}
+              <Button sx={{ color: 'white' }} size="small" onClick={GoToPageHome} >На главную</Button>
+            <h3>           
+                 Тренды {sensorItem.Station_name} / Номер:  {sensorItem.Station_num}
             </h3>
             <LineChart plcData={ data }/>
         </div>

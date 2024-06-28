@@ -6,6 +6,7 @@ import MoreDetails from './pages/MoreDetails';
 import MainPage from './pages/MainPage';
 import TrendsPage from './pages/TrendsPage';
 import DrawerAppBar from './components/DrawerAppBar';
+import AboutUs from './pages/AboutUs';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <DrawerAppBar/>
         <Routes>
           <Route exact path='/' element={<MainPage />} />
+          <Route path='/about/' element={<AboutUs/>} />
           <Route  path='/trends/*' element={< TrendsPage />} />
           <Route  path='/details/*' element={< MoreDetails />} />
         </Routes>

@@ -25,7 +25,8 @@ function DrawerAppBar(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
   const GoToPageHome = () => { navigate('/') };
-  const enentButton = [GoToPageHome, GoToPageHome, GoToPageHome];
+  const GoToPageAbout = () => { navigate('/about') };
+  const enentButton = [GoToPageHome, GoToPageAbout, GoToPageHome];
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -82,7 +83,7 @@ function DrawerAppBar(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            ООО МЕТРИКОМ
           </Typography>
 
         </Toolbar>

@@ -12,6 +12,7 @@ import {
 
 import { Line } from 'react-chartjs-2';
 import '../LineChart.css'; // Импортируйте ваш CSS файл
+import { Box } from '@mui/material';
 
 ChartJS.register(
   CategoryScale,
@@ -72,15 +73,31 @@ const LineChart = ({ plcData }) => {
     console.log(data)
   }, [data])
   return (
-    <div className="line-chart-container">
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '70vh',
+        padding: '20px',
+        boxSizing: 'border-box', // Включаем padding в размер контейнера
+      }}
+    >
       {plcData ?
-         <div className="line-chart">
+        <Box sx={{
+          width: '100%',
+          height: '100%',
+          padding: '20px',
+        }}
+        >
           <Line
             data={data}
             options={options} />
-        </div>
-        : <h2>Push Button Load Chart</h2>}
-    </div>
+        </Box>
+        : <h2>Load data from server</h2>}
+    </Box>
+
   )
 }
 <div></div>

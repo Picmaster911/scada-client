@@ -5,12 +5,15 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MoreDetails from './pages/MoreDetails';
 import MainPage from './pages/MainPage';
 import TrendsPage from './pages/TrendsPage';
+import DrawerAppBar from './components/DrawerAppBar';
+
 
 function App() {
 
   return (
     <div className="App">
       <Router>
+      <DrawerAppBar/>
         <Routes>
           <Route exact path='/' element={<MainPage />} />
           <Route  path='/trends/*' element={< TrendsPage />} />

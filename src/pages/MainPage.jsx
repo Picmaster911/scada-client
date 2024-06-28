@@ -3,7 +3,6 @@ import { Grid, Typography, Box } from '@mui/material';
 import BasicCardItem from '../components/BasicCardItem'
 import logo from '../logo.svg';
 
-
 function MainPage() {
 
     const [data, setData] = useState(null);
@@ -38,6 +37,7 @@ function MainPage() {
 
     return (
         <header className="App-header">
+
             <Grid container direction="column" alignItems="center" spacing={2}>
                 <Grid item xs={12}>
                     <Typography variant="h4" component="p">

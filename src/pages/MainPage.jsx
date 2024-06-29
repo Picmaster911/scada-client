@@ -63,9 +63,6 @@ function MainPage() {
                         </Grid>
                     )}
                 </Grid>
-                <Grid item xs={12}>
-                    <img src={logo} className="App-logo" alt="logo" />
-                </Grid>
             </Grid>
         </header>
     )

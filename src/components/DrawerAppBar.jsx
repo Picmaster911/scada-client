@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/system';
 import { useLocation, useNavigate } from 'react-router-dom';
+import logo from '../logo.svg';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
@@ -83,7 +84,9 @@ function DrawerAppBar(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
+            <img src={logo} className="App-logo" alt="logo" />
             SCADA ПНС & КНФС
+            <img src={logo} className="App-logo" alt="logo" />
           </Typography>
 
         </Toolbar>

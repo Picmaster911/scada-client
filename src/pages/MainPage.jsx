@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography, Box } from '@mui/material';
+import { Grid, Typography, Box, Hidden   } from '@mui/material';
 import BasicCardItem from '../components/BasicCardItem'
 import logo from '../logo.svg';
 
@@ -39,11 +39,11 @@ function MainPage() {
         <header className="App-header">
 
             <Grid container direction="column" alignItems="center" spacing={2}>
-                <Grid item xs={12}>
-                    <Typography variant="h4" component="p">
+                <Hidden smUp>
+                    <Typography variant="h4" component="p" marginTop="5px">
                         SCADA ПНС & КНФС
                     </Typography>
-                </Grid>
+                </Hidden>
                 <Grid item xs={12}>
                     {!data ? (
                         <Typography variant="h1">Load data</Typography>

@@ -42,7 +42,7 @@ function BasicCardItem({ sensorItemProps }) {
           Уровень реальный - {sensorItemProps.Station_PV}
         </Typography>
         <Typography variant="body2">
-          Загрузка - {sensorItemProps.Station_PWM}%, Ток - {sensorItemProps.Station_Amper}A
+          Загрузка - 
         </Typography>
         <Typography variant="body2">
           Уровень резервуар 3 - {sensorItemProps.Station_PV2}

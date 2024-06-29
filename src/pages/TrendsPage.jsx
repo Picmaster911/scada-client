@@ -15,11 +15,10 @@ function TrendsPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://scada.asuscomm.com:8081/api/v1/trand/0'); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
+                const response = await fetch(`http://scada.asuscomm.com:8081/api/v1/trand/${sensorItem.Station_id}`); 
                 if (response.ok) {
                     const json = await response.json();
-                   // console.log(json);
-                    setData(json); // Предположим, что в ответе есть поле 'data'
+                    setData(json);
                 } else {
                     console.error('Ошибка HTTP: ' + response.status);
                 }

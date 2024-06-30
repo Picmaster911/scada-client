@@ -3,6 +3,7 @@ import { Box, Paper,Button } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider, styled} from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
 
 function MoreDetails() {
   const location = useLocation();
@@ -31,8 +32,17 @@ function MoreDetails() {
     padding: '20px',
     boxSizing: 'border-box', // Включаем padding в размер контейнер
   });
-const CommandButton = (e) =>{console.log(e.value)}
+const CommandButton = (e) =>{getDataAxios()}
 
+async function  getDataAxios(){
+  const res = await axios({
+    method: 'put',
+    url: 'http://scada.asuscomm.com:8081/api/v1/user_put/user1',
+
+  });
+  console.log(res)
+
+}
   return (
     <WraperBox>
       {[darkTheme].map((theme, index) => (

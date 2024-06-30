@@ -63,12 +63,12 @@ function MoreDetails() {
           command: e.target.id,
         })
       };
-
+      
       const response = await fetch('http://scada.asuscomm.com:8081/api/v1/user_put/user1', requestOptions); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
       if (response.ok) {
         const json = await response.json();
         console.log(json);
-        setAuth(true)
+        setAuth(json.result)
       } else {
         console.error('Ошибка HTTP: ' + response.status);
       }
@@ -134,7 +134,7 @@ function MoreDetails() {
                   <Button id='1' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА +</Button>
                   <Button id='2' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА -</Button>
                   <Button id='3' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)}  >КОМАНДА СБРОС</Button>
-                  <Button id='5' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА БЛОК</Button>
+                  <Button id='4' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА БЛОК</Button>
                 </Box> : <div></div>
               }
             </Box>

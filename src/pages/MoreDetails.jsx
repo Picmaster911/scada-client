@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function MoreDetails() {
 
-   // alignSelf: 'flex-end' 
+  // alignSelf: 'flex-end' 
   const location = useLocation();
   const sensorItem = location.state?.sensorItemProps;
 
@@ -58,6 +58,7 @@ function MoreDetails() {
       if (response.ok) {
         const json = await response.json();
         console.log(json);
+        test = true
       } else {
         console.error('Ошибка HTTP: ' + response.status);
       }
@@ -65,12 +66,14 @@ function MoreDetails() {
       console.error('Ошибка при запросе:', error);
     }
   };
+  const test = false
 
+  const [fildUser, setFildUser] = useState(null)
 
- const [fildUser, setFildUser] = useState (null)
- const eventFromInputUser = (e) => {
-  setFildUser (e)
- }
+  const eventFromInputUser = (e) => {
+    if (fildUser === 'user1')
+    setFildUser(e)
+  }
 
   return (
     <WraperBox>
@@ -83,7 +86,7 @@ function MoreDetails() {
           height: '100%',
         }}>
           <Item elevation={0}>
-            <Box>
+            <Box sx={{padding:"10px"}}>
               <Typography variant="h4">
                 Расширеная информация елемента управления
               </Typography>
@@ -108,20 +111,23 @@ function MoreDetails() {
                   Уровень резервуар 3 :  {sensorItem.Station_PV2}
                 </Typography>
               </Box>
-              <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 2,  justifyContent: 'center', marginTop:'30px' }}>
-                  <Typography variant="h5">
-                  Веведите имя пользователя                
+              <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 2, justifyContent: 'center', marginTop: '30px' }}>
+                <Typography variant="h5">
+                  Веведите имя 
                 </Typography>
-                <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={(e)=> eventFromInputUser(e.target.value) } />
+                <TextField id="outlined-basic" label="UserName" variant="outlined" onChange={(e) => eventFromInputUser(e.target.value)} />
+                <Button sx={{ marginLeft: "5px", marginBottom:'8px' }} variant="outlined" onClick={CommandButton} >Запрос</Button>
               </Box>
-              <Box>
-                <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton} >Команда старт</Button>
-                <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButtonFeth}>Команда стоп</Button>
-                <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton} >Команда старт</Button>
-                <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton}>Команда стоп</Button>
-                <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton} >Команда старт</Button>
-                <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton}>Команда стоп</Button>
-              </Box>
+              { (test) ?
+                <Box>
+                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton} >Команда старт</Button>
+                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButtonFeth}>Команда стоп</Button>
+                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton} >Команда старт</Button>
+                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton}>Команда стоп</Button>
+                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton} >Команда старт</Button>
+                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton}>Команда стоп</Button>
+                </Box> : <div></div>
+              }
             </Box>
           </Item>
         </Box>

@@ -36,16 +36,16 @@ function BasicCardItem({ sensorItemProps }) {
           {sensorItemProps.Station_status}
         </Typography>
         <Typography variant="body2">
-          Уровень заданный - {sensorItemProps.Station_SV}
+          Установленное задание - {sensorItemProps.Station_SV}
         </Typography>
         <Typography variant="body2">
-          Уровень реальный - {sensorItemProps.Station_PV}
+          Фактическое значение - {sensorItemProps.Station_PV}
         </Typography>
         <Typography variant="body2">
-          Загрузка - 
+          Загрузка -  {sensorItemProps.Station_PWM} %, Ток -  {sensorItemProps.Station_Amper}A
         </Typography>
         <Typography variant="body2">
-          Уровень резервуар 3 - {sensorItemProps.Station_PV2}
+          Датчик PV2 - {sensorItemProps.Station_PV2}
         </Typography>
       </CardContent>
       <CardActions sx={{ alignContent: 'center' }}  >

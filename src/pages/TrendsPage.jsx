@@ -30,13 +30,11 @@ function TrendsPage() {
     }, []);
     useEffect(() => {
     }, [data])
-
-    
+  
     return (
         <div className='App-header'>
-              <Button sx={{ color: 'white' }} size="small" onClick={GoToPageHome} >На главную</Button>
             <h3>           
-                 Тренды {sensorItem.Station_name} / Номер:  {sensorItem.Station_num}
+                 Тренды {sensorItem.Station_name}
             </h3>
             <LineChart plcData={ data }/>
         </div>

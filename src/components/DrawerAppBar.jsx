@@ -63,7 +63,7 @@ function DrawerAppBar(props) {
       {/*<AppBar component="nav" sx={{ bgcolor: '#3f51b5' }}> {/* Измените цвет здесь */}
       <CustomAppBar> {/* Цвет Хедера */}
         <Toolbar>
-        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block'} }}>
             {navItems.map((item, id) => (
               <Button key={item} sx={{ color: '#fff' }} onClick={enentButton[id]} >
                 {item}
@@ -75,14 +75,14 @@ function DrawerAppBar(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { md: 'none' } }}
           >
             <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'block'} }}
           >
             <img src={logo} className="App-logo" alt="logo" />
             SCADA ПНС & КНФС
@@ -101,7 +101,7 @@ function DrawerAppBar(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', sm: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >

@@ -3,7 +3,6 @@ import { Box, Paper, Button, TextField } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import axios from 'axios';
 
 function MoreDetails() {
 
@@ -11,7 +10,23 @@ function MoreDetails() {
   const location = useLocation();
   const sensorItem = location.state?.sensorItemProps;
 
-  const darkTheme = createTheme({ palette: { mode: 'dark' } });
+  const darkTheme = createTheme({
+     palette: { mode: 'dark' },
+     typography: {
+      h4: {
+        fontSize: '2rem', // default for larger screens
+        '@media (max-width:600px)': {
+          fontSize: '1.2rem', // smaller font size for mobile devices
+        },
+      },
+      h5: {
+        fontSize: '1.5rem', // default for larger screens
+        '@media (max-width:600px)': {
+          fontSize: '1rem', // smaller font size for mobile devices
+        },
+      },
+    },    
+    });
   const lightTheme = createTheme({ palette: { mode: 'light' } });
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -34,31 +49,26 @@ function MoreDetails() {
     padding: '20px',
     boxSizing: 'border-box', // Включаем padding в размер контейнер
   });
-  const CommandButton = (e) => { getDataAxios() }
-  const CommandButtonFeth = (e) => { fetchData() }
 
-  async function getDataAxios() {
-    const res = await axios({
-      method: 'put',
-      url: 'http://scada.asuscomm.com:8081/api/v1/user_put/user1',
-      headers: { 'Content-Type': 'application/json' },
-    });
-    console.log(res)
-  }
+  const CommandButtonFeth = (e) => { fetchData(e) }
 
-  const fetchData = async () => {
+  const fetchData = async (e) => {
     try {
       const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'Fetch PUT Request Example' })
+        body: JSON.stringify({
+          id: sensorItem.Station_id,
+          username: fildUser,
+          command: e.target.id,
+        })
       };
 
       const response = await fetch('http://scada.asuscomm.com:8081/api/v1/user_put/user1', requestOptions); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
       if (response.ok) {
         const json = await response.json();
         console.log(json);
-        test = true
+        setAuth(true)
       } else {
         console.error('Ошибка HTTP: ' + response.status);
       }
@@ -66,13 +76,11 @@ function MoreDetails() {
       console.error('Ошибка при запросе:', error);
     }
   };
-  const test = false
-
-  const [fildUser, setFildUser] = useState(null)
+  const [auth, setAuth] = useState(false);
+  const [fildUser, setFildUser] = useState('');
 
   const eventFromInputUser = (e) => {
-    if (fildUser === 'user1')
-    setFildUser(e)
+    setFildUser(e);
   }
 
   return (
@@ -86,7 +94,7 @@ function MoreDetails() {
           height: '100%',
         }}>
           <Item elevation={0}>
-            <Box sx={{padding:"10px"}}>
+            <Box sx={{ padding: "10px" }}>
               <Typography variant="h4">
                 Расширеная информация елемента управления
               </Typography>
@@ -111,21 +119,22 @@ function MoreDetails() {
                   Уровень резервуар 3 :  {sensorItem.Station_PV2}
                 </Typography>
               </Box>
-              <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 2, justifyContent: 'center', marginTop: '30px' }}>
-                <Typography variant="h5">
-                  Веведите имя 
-                </Typography>
-                <TextField id="outlined-basic" label="UserName" variant="outlined" onChange={(e) => eventFromInputUser(e.target.value)} />
-                <Button sx={{ marginLeft: "5px", marginBottom:'8px' }} variant="outlined" onClick={CommandButton} >Запрос</Button>
-              </Box>
-              { (test) ?
+              {(!auth) ?
+                <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 2, justifyContent: 'center', marginTop: '30px' }}>
+                  <Typography variant="h5">
+                    Веведите имя
+                  </Typography>
+                  <TextField id="outlined-basic" value={fildUser} autoFocus fullWidth type="password"
+                    label="UserName" variant="outlined" onChange={(e) => eventFromInputUser(e.target.value)} />
+                  <Button id="auth" sx={{ marginLeft: "5px", marginBottom: '8px' }} variant="outlined" onClick={CommandButtonFeth} >Запрос</Button>
+                </Box> : <div></div>
+              }
+              {(auth) ?
                 <Box>
-                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton} >Команда старт</Button>
-                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButtonFeth}>Команда стоп</Button>
-                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton} >Команда старт</Button>
-                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton}>Команда стоп</Button>
-                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton} >Команда старт</Button>
-                  <Button sx={{ marginLeft: "5px" }} variant="outlined" onClick={CommandButton}>Команда стоп</Button>
+                  <Button id='1' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА +</Button>
+                  <Button id='2' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА -</Button>
+                  <Button id='3' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)}  >КОМАНДА СБРОС</Button>
+                  <Button id='5' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА БЛОК</Button>
                 </Box> : <div></div>
               }
             </Box>

@@ -42,15 +42,15 @@ function BasicCardItem({ sensorItemProps }) {
           Фактическое значение - {sensorItemProps.Station_PV}
         </Typography>
         <Typography variant="body2">
-          Загрузка -  {sensorItemProps.Station_PWM} %, Ток -  {sensorItemProps.Station_Amper}A
+          Загрузка -  {sensorItemProps.Station_PWM}%, Ток -  {sensorItemProps.Station_Amper}A
         </Typography>
         <Typography variant="body2">
           Датчик PV2 - {sensorItemProps.Station_PV2}
         </Typography>
       </CardContent>
       <CardActions sx={{ alignContent: 'center' }}  >
-        <Button size="small" onClick={GoToPageDetails} >Детально</Button>
-        <Button size="small" onClick={GoToPageTrends}>Тренды</Button>
+        <Button size="small" onClick={GoToPageDetails}>Детально</Button>
+        <Button size="small" onClick={GoToPageTrends}>Графики</Button>
       </CardActions>
     </Card>
   )

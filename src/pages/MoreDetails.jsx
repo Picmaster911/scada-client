@@ -64,7 +64,7 @@ function MoreDetails() {
         })
       };
       
-      const response = await fetch('http://scada.asuscomm.com:8081/api/v1/user_put/user1', requestOptions); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
+      const response = await fetch('http://scada.asuscomm.com:8081/api/v1/user_put', requestOptions); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
       if (response.ok) {
         const json = await response.json();
         console.log(json);
@@ -107,16 +107,16 @@ function MoreDetails() {
                   Режим работы :  {sensorItem.Station_status}
                 </Typography>
                 <Typography variant="h5">
-                  Уровень заданный: {sensorItem.Station_SV}
+                  Установленное задание: {sensorItem.Station_SV}
                 </Typography>
                 <Typography variant="h5">
-                  Уровень реальный:  {sensorItem.Station_PV}
+                  Фактическое значение:  {sensorItem.Station_PV}
                 </Typography>
                 <Typography variant="h5">
                   Загрузка : {sensorItem.Station_PWM}%, Ток - {sensorItem.Station_Amper}A
                 </Typography>
                 <Typography variant="h5">
-                  Уровень резервуар 3 :  {sensorItem.Station_PV2}
+                Датчик PV2 :  {sensorItem.Station_PV2}
                 </Typography>
               </Box>
               {(!auth) ?
@@ -133,7 +133,7 @@ function MoreDetails() {
                 <Box>
                   <Button id='1' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА +</Button>
                   <Button id='2' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА -</Button>
-                  <Button id='3' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)}  >КОМАНДА СБРОС</Button>
+                  <Button id='3' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА СБРОС</Button>
                   <Button id='4' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА БЛОК</Button>
                 </Box> : <div></div>
               }

@@ -30,14 +30,14 @@ const LineChart = ({ plcData }) => {
     let { Station_trand } = plcData
     dataChart = Station_trand;
 
-    dataChart.forEach(element => {
-      console.log(plcData)
+    //dataChart.forEach(element => {
+    //  console.log(plcData)
 
-    });
+    //});
   }
 
   var data = {
-    labels: dataChart?.map(x => Date.now().toString()),
+    labels: dataChart?.map(x => new Date(x.DateTime).toLocaleTimeString()),
     datasets: [{
       label: 'var_2',
       data: dataChart?.map(x => x.var_2),

@@ -107,10 +107,10 @@ function MoreDetails() {
                   Режим работы :  {sensorItem.Station_status}
                 </Typography>
                 <Typography variant="h5">
-                  Установленное задание: {sensorItem.Station_SV}
+                  Установленное задание : {sensorItem.Station_SV}
                 </Typography>
                 <Typography variant="h5">
-                  Фактическое значение:  {sensorItem.Station_PV}
+                  Фактическое значение :  {sensorItem.Station_PV}
                 </Typography>
                 <Typography variant="h5">
                   Загрузка : {sensorItem.Station_PWM}%, Ток - {sensorItem.Station_Amper}A

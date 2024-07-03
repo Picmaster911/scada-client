@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, Paper, Button, TextField } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
@@ -9,6 +9,28 @@ function MoreDetails() {
   // alignSelf: 'flex-end' 
   const location = useLocation();
   const sensorItem = location.state?.sensorItemProps;
+  const [data, setData] = useState(sensorItem); //location.state?.sensorItemProps;
+  useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const response = await fetch(`http://scada.asuscomm.com:8081/api/v1/data/${sensorItem.Station_id}`); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
+              if (response.ok) {
+                  const json = await response.json();
+                  setData(json);
+              } else {
+                  console.error('Ошибка HTTP: ' + response.status);
+              }
+          } catch (error) {
+              console.error('Ошибка при запросе:', error);
+          }
+      };
+
+      const interval = setInterval(() => {
+          fetchData();
+      }, 1000); // Запрос каждую секунду
+
+      return () => clearInterval(interval); // Очистка интервала при размонтировании компонента
+  }, []); // Пустой массив зависимостей, чтобы useEffect вызывался только при монтировании
 
   const darkTheme = createTheme({
      palette: { mode: 'dark' },
@@ -64,10 +86,9 @@ function MoreDetails() {
         })
       };
       
-      const response = await fetch('http://scada.asuscomm.com:8081/api/v1/user_put', requestOptions); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
+      const response = await fetch('http://scada.asuscomm.com:8081/api/v1/user_put', requestOptions); // http://scada.asuscomm.com:8081
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
         setAuth(json.result)
       } else {
         console.error('Ошибка HTTP: ' + response.status);
@@ -76,6 +97,7 @@ function MoreDetails() {
       console.error('Ошибка при запросе:', error);
     }
   };
+
   const [auth, setAuth] = useState(false);
   const [fildUser, setFildUser] = useState('');
 
@@ -96,27 +118,27 @@ function MoreDetails() {
           <Item elevation={0}>
             <Box sx={{ padding: "10px" }}>
               <Typography variant="h4">
-                Расширеная информация елемента управления
+                {data.Station_alarm}
               </Typography>
               <Typography variant="h4">
-                Имя станции :  {sensorItem.Station_name}
+                Имя станции :  {data.Station_name}
               </Typography>
 
               <Box sx={{ marginTop: '10px' }}>
                 <Typography variant="h5">
-                  Режим работы :  {sensorItem.Station_status}
+                  Режим работы :  {data.Station_status}
                 </Typography>
                 <Typography variant="h5">
-                  Установленное задание : {sensorItem.Station_SV}
+                  Установленное задание : {data.Station_SV}
                 </Typography>
                 <Typography variant="h5">
-                  Фактическое значение :  {sensorItem.Station_PV}
+                  Фактическое значение :  {data.Station_PV}
                 </Typography>
                 <Typography variant="h5">
-                  Загрузка : {sensorItem.Station_PWM}%, Ток - {sensorItem.Station_Amper}A
+                  Загрузка : {data.Station_PWM}%, Ток : {data.Station_Amper}A
                 </Typography>
                 <Typography variant="h5">
-                Датчик PV2 :  {sensorItem.Station_PV2}
+                Датчик PV2 :  {data.Station_PV2}
                 </Typography>
               </Box>
               {(!auth) ?

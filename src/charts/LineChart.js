@@ -37,7 +37,7 @@ const LineChart = ({ plcData }) => {
   var data = {
     labels: dataChart?.map(x => new Date(x.DateTime).toLocaleTimeString()),
     datasets: [{
-      label: 'SV',
+      label: 'Задание',
       data: dataChart?.map(x => x.var_1),
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
       borderColor: 'rgb(75, 192, 192)',
@@ -45,21 +45,21 @@ const LineChart = ({ plcData }) => {
       tension: 0.1
     },
     {
-      label: 'PV',
+      label: 'Фактическое',
       data: dataChart?.map(x => x.var_2),
       borderColor: 'rgb(53, 162, 235)',
       pointRadius: 0, // Убираем точки
       tension: 0.1,
     },
     {
-      label: 'PWM',
+      label: 'Загрузка',
       data: dataChart?.map(x => x.var_3),
       borderColor: 'rgb(162, 162, 235)',
       pointRadius: 0, // Убираем точки
       tension: 0.1,
     },
     {
-      label: 'Amper',
+      label: 'Ток',
       data: dataChart?.map(x => x.var_4),
       borderColor: 'rgb(53, 53, 235)',
       pointRadius: 0, // Убираем точки

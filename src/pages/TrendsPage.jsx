@@ -34,7 +34,7 @@ function TrendsPage() {
     return (
         <div className='App-header'>
             <h3>           
-                 Тренды {sensorItem.Station_name}
+                 {sensorItem.Station_name}
             </h3>
             <LineChart plcData={ data }/>
         </div>

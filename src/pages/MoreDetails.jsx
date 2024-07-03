@@ -117,11 +117,12 @@ function MoreDetails() {
         }}>
           <Item elevation={0}>
             <Box sx={{ padding: "10px" }}>
-              <Typography variant="h4">
+              <Typography variant="h5" color="red">
                 {data.Station_alarm}
               </Typography>
+
               <Typography variant="h4">
-                Имя станции :  {data.Station_name}
+                {data.Station_name}
               </Typography>
 
               <Box sx={{ marginTop: '10px' }}>

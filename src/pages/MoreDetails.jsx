@@ -93,7 +93,7 @@ function MoreDetails() {
         })
       };
       
-      const response = await fetch('http://scada.asuscomm.com:8081/api/v1/user_put/user1', requestOptions); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
+      const response = await fetch('http://scada.asuscomm.com:8081/api/v1/user_put', requestOptions); // http://scada.asuscomm.com:8081
       if (response.ok) {
         const json = await response.json();
         console.log(json);
@@ -117,11 +117,12 @@ function MoreDetails() {
         }}>
           <Item elevation={0}>
             <Box sx={{ padding: "10px" }}>
-              <Typography variant="h4">
-                Расширеная информация елемента управления
+              <Typography variant="h5" color="red">
+                {data.Station_alarm}
               </Typography>
+
               <Typography variant="h4">
-                Имя станции :  {data.Station_name}
+                {data.Station_name}
               </Typography>
 
               <Box sx={{ marginTop: '10px' }}>
@@ -129,23 +130,23 @@ function MoreDetails() {
                   Режим работы :  {data.Station_status}
                 </Typography>
                 <Typography variant="h5">
-                  Уровень заданный: {data.Station_SV}
+                  Установленное задание : {data.Station_SV}
                 </Typography>
                 <Typography variant="h5">
-                  Уровень реальный:  {data.Station_PV}
+                  Фактическое значение :  {data.Station_PV}
                 </Typography>
                 <Typography variant="h5">
-                  Загрузка : {data.Station_PWM}%, Ток - {data.Station_Amper}A
+                  Загрузка : {data.Station_PWM}%, Ток : {data.Station_Amper}A
                 </Typography>
                 <Typography variant="h5">
-                  Уровень резервуар 3 :  {data.Station_PV2}
+                Датчик PV2 :  {data.Station_PV2}
                 </Typography>
               </Box>
               {(auth) ?
                 <Box>
                   <Button id='1' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА +</Button>
                   <Button id='2' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА -</Button>
-                  <Button id='3' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)}  >КОМАНДА СБРОС</Button>
+                  <Button id='3' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА СБРОС</Button>
                   <Button id='4' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА БЛОК</Button>
                 </Box> : <div></div>
               }

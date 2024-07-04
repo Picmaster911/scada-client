@@ -29,32 +29,49 @@ const LineChart = ({ plcData }) => {
   if (plcData) {
     let { Station_trand } = plcData
     dataChart = Station_trand;
-
-    dataChart.forEach(element => {
-      console.log(plcData)
-
-    });
+    //dataChart.forEach(element => {
+    //  console.log(plcData)
+    //});
   }
 
   var data = {
-    labels: dataChart?.map(x => Date.now().toString()),
+    labels: dataChart?.map(x => new Date(x.DateTime).toLocaleTimeString()),
     datasets: [{
-      label: 'var_2',
-      data: dataChart?.map(x => x.var_2),
-      fill: false,
+      label: 'Задание',
+      data: dataChart?.map(x => x.var_1),
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
       borderColor: 'rgb(75, 192, 192)',
       pointRadius: 0, // Убираем точки
       tension: 0.1
     },
     {
-      label: 'var_1',
-      data: dataChart?.map(x => x.var_1),
+      label: 'Фактическое',
+      data: dataChart?.map(x => x.var_2),
       borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
       pointRadius: 0, // Убираем точки
       tension: 0.1,
     },
-    ]
+    {
+      label: 'Загрузка',
+      data: dataChart?.map(x => x.var_3),
+      borderColor: 'rgb(162, 162, 235)',
+      pointRadius: 0, // Убираем точки
+      tension: 0.1,
+    },
+    {
+      label: 'Ток',
+      data: dataChart?.map(x => x.var_4),
+      borderColor: 'rgb(53, 53, 235)',
+      pointRadius: 0, // Убираем точки
+      tension: 0.1,
+    },
+    {
+      label: 'PV_2',
+      data: dataChart?.map(x => x.var_5),
+      borderColor: 'rgb(192, 192, 75)',
+      pointRadius: 0, // Убираем точки
+      tension: 0.1,
+    }]
   };
 
   var options = {

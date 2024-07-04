@@ -62,14 +62,14 @@ function LoginPage() {
   const dispatch = useDispatch();
 
   const theme = createTheme();
-  const userForm = ''
-  const password = ''
+  let userForm = ''
+  let password = ''
   const setUserForm = (e) =>{
-    console.log(e)
+    userForm = e;
   }
 
   const setPassword = (e) =>{
-    console.log(e)
+    password = e
   }
   const handleSubmit = (event) => {
     event.preventDefault(); // Предотвращает стандартное поведение отправки формы

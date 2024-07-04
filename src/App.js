@@ -7,22 +7,29 @@ import MainPage from './pages/MainPage';
 import TrendsPage from './pages/TrendsPage';
 import DrawerAppBar from './components/DrawerAppBar';
 import AboutUs from './pages/AboutUs';
+import LoginPage from './pages/LoginPage';
+import { Provider } from 'react-redux';
+import store from './store';
+
 
 
 function App() {
 
   return (
-    <div className="App">
-      <Router>
-      <DrawerAppBar/>
-        <Routes>
-          <Route exact path='/' element={<MainPage />} />
-          <Route path='/about/' element={<AboutUs/>} />
-          <Route  path='/trends/*' element={< TrendsPage />} />
-          <Route  path='/details/*' element={< MoreDetails />} />
-        </Routes>
-      </Router>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Router>
+          <DrawerAppBar />
+          <Routes>
+            <Route exact path='/' element={<MainPage />} />
+            <Route path='/about/' element={<AboutUs />} />
+            <Route path='/trends/*' element={< TrendsPage />} />
+            <Route path='/details/*' element={< MoreDetails />} />
+            <Route path='/login' element={< LoginPage />} />
+          </Routes>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 

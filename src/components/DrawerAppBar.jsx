@@ -19,7 +19,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../logo.svg';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = ['Home', 'About', 'Contact','Login'];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -27,7 +27,8 @@ function DrawerAppBar(props) {
   const navigate = useNavigate();
   const GoToPageHome = () => { navigate('/') };
   const GoToPageAbout = () => { navigate('/about') };
-  const enentButton = [GoToPageHome, GoToPageAbout, GoToPageHome];
+  const GoToPageLogin = () => { navigate('/login') };
+  const enentButton = [GoToPageHome, GoToPageAbout, GoToPageHome,GoToPageLogin];
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);

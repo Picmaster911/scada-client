@@ -3,13 +3,20 @@ import { Box, Paper, Button, TextField } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import { useSelector } from 'react-redux';
 
 function MoreDetails() {
 
-  // alignSelf: 'flex-end' 
+  let auth = false
   const location = useLocation();
   const sensorItem = location.state?.sensorItemProps;
 
+  const resultState = useSelector((state) => state.authSlice);
+  console.log(resultState)
+
+  if (resultState != null && resultState.result) {
+       auth = resultState.result;
+  }  
   const darkTheme = createTheme({
      palette: { mode: 'dark' },
      typography: {
@@ -59,7 +66,7 @@ function MoreDetails() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           id: sensorItem.Station_id,
-          username: fildUser,
+          username: resultState.userName,
           command: e.target.id,
         })
       };
@@ -68,7 +75,6 @@ function MoreDetails() {
       if (response.ok) {
         const json = await response.json();
         console.log(json);
-        setAuth(json.result)
       } else {
         console.error('Ошибка HTTP: ' + response.status);
       }
@@ -76,12 +82,6 @@ function MoreDetails() {
       console.error('Ошибка при запросе:', error);
     }
   };
-  const [auth, setAuth] = useState(false);
-  const [fildUser, setFildUser] = useState('');
-
-  const eventFromInputUser = (e) => {
-    setFildUser(e);
-  }
 
   return (
     <WraperBox>
@@ -119,16 +119,6 @@ function MoreDetails() {
                   Уровень резервуар 3 :  {sensorItem.Station_PV2}
                 </Typography>
               </Box>
-              {(!auth) ?
-                <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 2, justifyContent: 'center', marginTop: '30px' }}>
-                  <Typography variant="h5">
-                    Веведите имя
-                  </Typography>
-                  <TextField id="outlined-basic" value={fildUser} autoFocus fullWidth type="password"
-                    label="UserName" variant="outlined" onChange={(e) => eventFromInputUser(e.target.value)} />
-                  <Button id="auth" sx={{ marginLeft: "5px", marginBottom: '8px' }} variant="outlined" onClick={CommandButtonFeth} >Запрос</Button>
-                </Box> : <div></div>
-              }
               {(auth) ?
                 <Box>
                   <Button id='1' sx={{ marginLeft: "5px" }} variant="outlined" onClick={(e) => CommandButtonFeth(e)} >КОМАНДА +</Button>

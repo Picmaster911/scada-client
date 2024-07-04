@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { moduleName } from './constants';
 import checkUser from './thunks';
-import setUserToLocal from './actions'; // Импортируйте ваш новый action
+import setActions from './actions'; // Импортируйте ваш новый action
 
 const initialState = {
   result: null,
@@ -18,8 +18,12 @@ const authSlice = createSlice({
         state.result = payload.result;
         state.userName = payload.userName;
       })
-      .addCase(setUserToLocal.setUserToLocal, (state, { payload }) => {
+      .addCase(setActions.setUserToLocal, (state, { payload }) => {
         state = payload;
+      })
+      .addCase(setActions.setLogOut, (state, { payload }) => {
+        state.result = null;
+        state.userName = null;
       });
   },
 });

@@ -57,7 +57,7 @@ function LoginPage() {
     }
   });
 
-  const  result = useSelector((state) => state.authSlice);
+  const  resultState = useSelector((state) => state.authSlice);
 
   const dispatch = useDispatch();
 
@@ -79,11 +79,11 @@ function LoginPage() {
   }
 
   useEffect(() => {
-    if (result != null && result.result) {
-      dispatch(setUserToLocal.setUserToLocal(result))
+    if (resultState != null && resultState.result) {
+      dispatch(setUserToLocal.setUserToLocal(resultState))
       GoToPageMain();
     }
-  }, [result]);
+  }, [resultState]);
 
   return (
     <WraperBox>

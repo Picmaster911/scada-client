@@ -6,6 +6,10 @@ const setUserToLocal = createAction(`${moduleName}/setUser`, (payload) => {
   return { payload };
 });
 
+const setLogOut = createAction(`${moduleName}/setLogOut`, (payload) => {
+  return { payload };
+});
 export default {
   setUserToLocal,
+  setLogOut,
 };

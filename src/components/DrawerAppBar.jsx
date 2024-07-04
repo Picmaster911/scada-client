@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,18 +17,28 @@ import Button from '@mui/material/Button';
 import { styled } from '@mui/system';
 import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import setLogOut from '../store/auth/actions'
+
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact','Login'];
+const navItems = ['Home', 'About', 'Contact', 'Login'];
+const navItemsAuth = ['Home', 'About', 'Contact', 'LogOut'];
+let auth = false;
 
 function DrawerAppBar(props) {
+  const dispatch = useDispatch();
+  const resultState = useSelector((state) => state.authSlice);
+  (resultState != null && resultState.result) ? auth = resultState.result : auth =false;
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
   const GoToPageHome = () => { navigate('/') };
   const GoToPageAbout = () => { navigate('/about') };
   const GoToPageLogin = () => { navigate('/login') };
-  const enentButton = [GoToPageHome, GoToPageAbout, GoToPageHome,GoToPageLogin];
+  const LogOut = () => {  dispatch(setLogOut.setLogOut())};
+  const enentButton = [GoToPageHome, GoToPageAbout, GoToPageHome, GoToPageLogin];
+  const enentButtonAuth = [GoToPageHome, GoToPageAbout, GoToPageHome, LogOut];
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -40,15 +50,27 @@ function DrawerAppBar(props) {
         MUI
       </Typography>
       <Divider />
-      <List>
-        {navItems.map((item,id) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }} onClick={enentButton[id]}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      {(!auth) ?
+        <List>
+          {navItems.map((item, id) => (
+            <ListItem key={item} disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }} onClick={enentButton[id]}>
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        :
+        <List>
+          {navItemsAuth.map((item, id) => (
+            <ListItem key={item} disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }} onClick={enentButtonAuth[id]}>
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      }
     </Box>
   );
 
@@ -64,13 +86,23 @@ function DrawerAppBar(props) {
       {/*<AppBar component="nav" sx={{ bgcolor: '#3f51b5' }}> {/* Измените цвет здесь */}
       <CustomAppBar> {/* Цвет Хедера */}
         <Toolbar>
-        <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block'} }}>
-            {navItems.map((item, id) => (
-              <Button key={item} sx={{ color: '#fff' }} onClick={enentButton[id]} >
-                {item}
-              </Button>
-            ))}
-          </Box>
+          {(!auth) ?
+            <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
+              {navItems.map((item, id) => (
+                <Button key={item} sx={{ color: '#fff' }} onClick={enentButton[id]} >
+                  {item}
+                </Button>
+              ))}
+            </Box>
+            :
+            <Box sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
+              {navItemsAuth.map((item, id) => (
+                <Button key={item} sx={{ color: '#fff' }} onClick={enentButtonAuth[id]} >
+                  {item}
+                </Button>
+              ))}
+            </Box>
+          }
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -83,7 +115,7 @@ function DrawerAppBar(props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'block'} }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'block' } }}
           >
             <img src={logo} className="App-logo" alt="logo" />
             SCADA ПНС & КНФС

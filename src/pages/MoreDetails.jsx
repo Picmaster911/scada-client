@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, Paper, Button, TextField } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
@@ -10,9 +10,9 @@ function MoreDetails() {
   let auth = false
   const location = useLocation();
   const sensorItem = location.state?.sensorItemProps;
+  const [data, setData] = useState(sensorItem); //location.state?.sensorItemProp
 
   const resultState = useSelector((state) => state.authSlice);
-  console.log(resultState)
 
   if (resultState != null && resultState.result) {
        auth = resultState.result;
@@ -59,6 +59,28 @@ function MoreDetails() {
 
   const CommandButtonFeth = (e) => { fetchData(e) }
 
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await fetch(`http://scada.asuscomm.com:8081/api/v1/data/${sensorItem.Station_id}`); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
+            if (response.ok) {
+                const json = await response.json();
+                setData(json);
+            } else {
+                console.error('Ошибка HTTP: ' + response.status);
+            }
+        } catch (error) {
+            console.error('Ошибка при запросе:', error);
+        }
+    };
+
+    const interval = setInterval(() => {
+        fetchData();
+    }, 1000); // Запрос каждую секунду
+
+    return () => clearInterval(interval); // Очистка интервала при размонтировании компонента
+  }, []); // Пустой массив зависимостей, чтобы useEffect вызывался только при монтировании
+
   const fetchData = async (e) => {
     try {
       const requestOptions = {
@@ -99,24 +121,24 @@ function MoreDetails() {
                 Расширеная информация елемента управления
               </Typography>
               <Typography variant="h4">
-                Имя станции :  {sensorItem.Station_name}
+                Имя станции :  {data.Station_name}
               </Typography>
 
               <Box sx={{ marginTop: '10px' }}>
                 <Typography variant="h5">
-                  Режим работы :  {sensorItem.Station_status}
+                  Режим работы :  {data.Station_status}
                 </Typography>
                 <Typography variant="h5">
-                  Уровень заданный: {sensorItem.Station_SV}
+                  Уровень заданный: {data.Station_SV}
                 </Typography>
                 <Typography variant="h5">
-                  Уровень реальный:  {sensorItem.Station_PV}
+                  Уровень реальный:  {data.Station_PV}
                 </Typography>
                 <Typography variant="h5">
-                  Загрузка : {sensorItem.Station_PWM}%, Ток - {sensorItem.Station_Amper}A
+                  Загрузка : {data.Station_PWM}%, Ток - {data.Station_Amper}A
                 </Typography>
                 <Typography variant="h5">
-                  Уровень резервуар 3 :  {sensorItem.Station_PV2}
+                  Уровень резервуар 3 :  {data.Station_PV2}
                 </Typography>
               </Box>
               {(auth) ?

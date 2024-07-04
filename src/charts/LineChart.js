@@ -29,9 +29,6 @@ const LineChart = ({ plcData }) => {
   if (plcData) {
     let { Station_trand } = plcData
     dataChart = Station_trand;
-    //dataChart.forEach(element => {
-    //  console.log(plcData)
-    //});
   }
 
   var data = {
@@ -39,7 +36,6 @@ const LineChart = ({ plcData }) => {
     datasets: [{
       label: 'Задание',
       data: dataChart?.map(x => x.var_1),
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
       borderColor: 'rgb(75, 192, 192)',
       pointRadius: 0, // Убираем точки
       tension: 0.1
@@ -87,7 +83,6 @@ const LineChart = ({ plcData }) => {
   }
 
   useEffect(() => {
-    console.log(data)
   }, [data])
   return (
     <Box

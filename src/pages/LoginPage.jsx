@@ -77,6 +77,7 @@ function LoginPage() {
       const req = {
         id: 10,
         username: userForm,
+        pwd: password, 
         command: "",
       }
       await dispatch(checkUser.checkUser(req));

@@ -105,6 +105,16 @@ function MoreDetails() {
     }
   };
 
+  const [time, setTime] = useState(null);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setTime(new Date(Date.now()).toLocaleString());
+        }, 1000);
+
+        return () => clearInterval(intervalId); // Очищаем интервал при размонтировании компонента
+    }, []);
+
   return (
     <WraperBox>
       <ThemeProvider theme={darkTheme}>
@@ -117,6 +127,11 @@ function MoreDetails() {
         }}>
           <Item elevation={0}>
             <Box sx={{ padding: "10px" }}>
+            <Typography variant="h5" color="GREEN">
+                {time}
+              </Typography>
+
+
               <Typography variant="h5" color="red">
                 {data.Station_alarm}
               </Typography>

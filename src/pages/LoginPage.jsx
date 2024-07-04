@@ -62,9 +62,15 @@ function LoginPage() {
   const dispatch = useDispatch();
 
   const theme = createTheme();
-  const [userForm, setUserForm] = useState('');
-  const [password, setPassword] = useState('');
+  const userForm = ''
+  const password = ''
+  const setUserForm = (e) =>{
+    console.log(e)
+  }
 
+  const setPassword = (e) =>{
+    console.log(e)
+  }
   const handleSubmit = (event) => {
     event.preventDefault(); // Предотвращает стандартное поведение отправки формы
     const request = async () => {
@@ -117,8 +123,6 @@ function LoginPage() {
                 label="Username"
                 name="username"
                 autoComplete="username"
-                autoFocus
-                value={userForm}
                 onChange={(e) => setUserForm(e.target.value)}
               />
               <DarkTextField
@@ -131,7 +135,6 @@ function LoginPage() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <FormControlLabel

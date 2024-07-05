@@ -100,6 +100,10 @@ const LineChart = ({ plcData }) => {
         },
       },
       zoom: {
+        pan: {
+          enabled: true,
+          mode: 'xy',
+        },
         zoom: {
           wheel: {
             enabled: true,

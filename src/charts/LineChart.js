@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useRef, useEffect } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,7 +12,7 @@ import {
 
 import { Line } from 'react-chartjs-2';
 import '../LineChart.css'; // Импортируйте ваш CSS файл
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import zoomPlugin from 'chartjs-plugin-zoom';
 
 ChartJS.register(
@@ -72,8 +72,7 @@ const LineChart = ({ plcData }) => {
     }]
   };
 
-
- const options = {
+  const options = {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
@@ -114,6 +113,16 @@ const LineChart = ({ plcData }) => {
     },
   };
 
+  const chartRef = useRef(null);
+
+
+  const handleResetZoom = () => {
+    if (chartRef.current) {
+      chartRef.current.resetZoom();
+    }
+  };
+  
+
   useEffect(() => {
   }, [data])
   return (
@@ -136,8 +145,12 @@ const LineChart = ({ plcData }) => {
         }}
         >
           <Line
+            ref={chartRef}
             data={data}
             options={options} />
+          <Button onClick={handleResetZoom} variant="contained" sx={{ marginTop: '10px' }}>
+            Reset Zoom
+          </Button>
         </Box>
         : <h2>Load data from server</h2>}
     </Box>

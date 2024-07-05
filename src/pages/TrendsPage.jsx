@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LineChart from '../charts/LineChart';
-import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { Box, Typography } from '@mui/material';
 
 function TrendsPage() {
     const location = useLocation();
@@ -10,12 +11,22 @@ function TrendsPage() {
     const [data, setData] = useState(null);
     const navigate = useNavigate();
 
-    const GoToPageHome = () => { navigate('/') };
+    const WraperBox = styled(Box)({
+        marginTop: "20px",
+        display: 'block',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100vh',
+        padding: '20px',
+        boxSizing: 'border-box', // Включаем padding в размер контейнера
+    });
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://scada.asuscomm.com:8081/api/v1/trand/${sensorItem.Station_id}`); 
+                const response = await fetch(`http://scada.asuscomm.com:8081/api/v1/trand/${sensorItem.Station_id}`);
                 if (response.ok) {
                     const json = await response.json();
                     setData(json);
@@ -30,14 +41,14 @@ function TrendsPage() {
     }, []);
     useEffect(() => {
     }, [data])
-  
+
     return (
-        <div className='App-header'>
-            <h3>           
-                 {sensorItem.Station_name}
-            </h3>
-            <LineChart plcData={ data }/>
-        </div>
+        <WraperBox>
+            <Typography variant="h5" color="LightCyan" sx={{marginTop:'30px'}}>
+                 {(sensorItem && sensorItem.Station_name) ? sensorItem.Station_name : 'Название станции не определено'}
+            </Typography>
+            <LineChart plcData={data} />
+        </WraperBox>
 
     )
 }

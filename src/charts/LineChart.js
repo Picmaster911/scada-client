@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import '../LineChart.css'; // Импортируйте ваш CSS файл
 import { Box } from '@mui/material';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 ChartJS.register(
   CategoryScale,
@@ -21,7 +22,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  zoomPlugin,
 );
 
 const LineChart = ({ plcData }) => {
@@ -70,17 +72,47 @@ const LineChart = ({ plcData }) => {
     }]
   };
 
-  var options = {
+
+ const options = {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
-    },
-    legend: {
-      labels: {
-        fontSize: 25,
+      x: {
+        title: {
+          display: true,
+          text: 'Time',
+        },
+        ticks: {
+          maxRotation: 90,
+          minRotation: 50,
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Value',
+        },
       },
     },
-  }
+    plugins: {
+      legend: {
+        labels: {
+          fontSize: 25,
+        },
+      },
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true,
+          },
+          mode: 'xy',
+        },
+      },
+    },
+  };
 
   useEffect(() => {
   }, [data])

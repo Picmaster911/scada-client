@@ -12,13 +12,13 @@ function TrendsPage() {
     const navigate = useNavigate();
 
     const WraperBox = styled(Box)({
-        marginTop: "20px",
+        marginTop: "75px",
         display: 'block',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
         height: '100vh',
-        padding: '20px',
+        padding: '0px',
         boxSizing: 'border-box', // Включаем padding в размер контейнера
     });
 
@@ -49,7 +49,6 @@ function TrendsPage() {
             </Typography>
             <LineChart plcData={data} />
         </WraperBox>
-
     )
 }
 export default TrendsPage

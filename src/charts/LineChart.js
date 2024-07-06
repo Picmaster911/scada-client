@@ -136,8 +136,8 @@ const LineChart = ({ plcData }) => {
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        height: '85vh',
-        padding: '10px',
+        height: '70vh',
+        padding: '0px',
         boxSizing: 'border-box', // Включаем padding в размер контейнера
       }}
     >

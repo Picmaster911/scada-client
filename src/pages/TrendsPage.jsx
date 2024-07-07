@@ -19,7 +19,8 @@ function TrendsPage() {
         width: '100%',
         height: '100vh',
         padding: '0px',
-        boxSizing: 'border-box', // Включаем padding в размер контейнера
+        boxSizing: 'border-box', // Включаем padding в размер контейнер
+        overflow: 'auto', // предотвращаем обрезку содержимого
     });
 
 

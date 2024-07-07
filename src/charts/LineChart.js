@@ -9,11 +9,14 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-
+import UseNumberInput from '../components/UseNumberInput'
+import { styled } from '@mui/material/styles';
 import { Line } from 'react-chartjs-2';
 import '../LineChart.css'; // Импортируйте ваш CSS файл
-import { Box, Button } from '@mui/material';
+import { Box, Button, Hidden } from '@mui/material';
 import zoomPlugin from 'chartjs-plugin-zoom';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 ChartJS.register(
   CategoryScale,
@@ -125,40 +128,77 @@ const LineChart = ({ plcData }) => {
       chartRef.current.resetZoom();
     }
   };
-  
+
+  const WraperBox = styled(Box)({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+    boxSizing: 'border-box', // Включаем padding в размер контейнер
+  });
 
   useEffect(() => {
   }, [data])
+  const [value, setValue] = React.useState(null);
+  console.log(value)
+  const callbkF = (value) => {
+    console.log(value)
+  }
+
   return (
     <Box
       sx={{
-        display: 'flex',
+        display: 'block',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        height: '70vh',
+        height: '60%',
         padding: '0px',
-        boxSizing: 'border-box', // Включаем padding в размер контейнера
+        // boxSizing: 'border-box', // Включаем padding в размер контейнера
+        // overflow: 'auto', // предотвращаем обрезку содержимого
       }}
     >
       {plcData ?
-        <Box sx={{
-          width: '100%',
-          height: '100%',
-          padding: '2px',
-        }}
+        <Box
+          sx={{
+            width: '100%',
+            height: '100%',
+            padding: '2px',
+            maxWidth: '100%',
+            maxHeight: '100%',
+          }}
         >
           <Line
             ref={chartRef}
             data={data}
             options={options} />
-          <Button onClick={handleResetZoom} variant="contained" sx={{ marginTop: '10px' }}>
-            Reset Zoom
-          </Button>
         </Box>
         : <h2>Load data from server</h2>}
+      <WraperBox>
+        <Hidden smDown>
+          <Button sx={{ m: 1, minWidth: '30px' }} onClick={handleResetZoom} variant="contained">
+            <ArrowBackIosNewIcon />
+            <ArrowBackIosNewIcon />
+          </Button>
+        </Hidden>
+        <Button sx={{ m: 1, minWidth: '30px' }} onClick={handleResetZoom} variant="contained">
+          <ArrowBackIosNewIcon />
+        </Button>
+        <UseNumberInput callbkF={callbkF} />
+        <Button sx={{ m: 1, minWidth: '30px' }} onClick={handleResetZoom} variant="contained" >
+          <ArrowForwardIosIcon />
+        </Button>
+        <Hidden smDown>
+          <Button sx={{ m: 1, minWidth: '30px' }} onClick={handleResetZoom} variant="contained" >
+            <ArrowForwardIosIcon />
+            <ArrowForwardIosIcon />
+          </Button>
+        </Hidden>
+        <Button sx={{ m: 1 }} onClick={handleResetZoom} variant="contained" >
+          Reset
+        </Button>
+      </WraperBox>
     </Box>
-
   )
 }
 <div></div>

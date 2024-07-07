@@ -6,7 +6,7 @@ import getAllCarts from '../store/allcart/thunks'
 //import logo from '../logo.svg';
 
 function MainPage() {
-
+    
     const { respone } = useSelector((state) => state.getAllCartsSlice);
     const dispatch = useDispatch();
     const getCart = () => {  dispatch(getAllCarts.getAllCarts())};
@@ -19,6 +19,7 @@ function MainPage() {
     }, []);
     return (
         <header className="App-header">
+
             <Grid container direction="column" alignItems="center" spacing={2}>
                 <Hidden smUp>
                     <Typography variant="h4" component="p" marginTop="5px">

@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush, ResponsiveContainer
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    Brush,
+    ResponsiveContainer
 } from 'recharts';
 import { Box } from '@mui/material';
 

@@ -62,7 +62,7 @@ function MoreDetails() {
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://scada.asuscomm.com:8081/api/v1/data/${sensorItem.Station_id}`); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8082
+            const response = await fetch(`http://93.127.20.110:8081/api/v1/data/${sensorItem.Station_id}`); // Замените URL на ваш реальный эндпоинт http://scada.asuscomm.com:8081
             if (response.ok) {
                 const json = await response.json();
                 setData(json);

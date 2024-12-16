@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Typography, Box, Hidden   } from '@mui/material';
+import { Grid, Typography, Box, Hidden } from '@mui/material';
 import BasicCardItem from '../components/BasicCardItem'
 import { useDispatch, useSelector } from 'react-redux';
 import getAllCarts from '../store/allcart/thunks'
 //import logo from '../logo.svg';
 
 function MainPage() {
-    
+
     const { respone } = useSelector((state) => state.getAllCartsSlice);
     const dispatch = useDispatch();
-    const getCart = () => {  dispatch(getAllCarts.getAllCarts())};
+    const getCart = () => { dispatch(getAllCarts.getAllCarts()) };
     useEffect(() => {
         const interval = setInterval(() => {
             getCart();
-        }, 1000); 
+        }, 1000);
 
         return () => clearInterval(interval);
     }, []);
@@ -21,11 +21,9 @@ function MainPage() {
         <header className="App-header">
 
             <Grid container direction="column" alignItems="center" spacing={2}>
-                <Hidden smUp>
-                    <Typography variant="h4" component="p" marginTop="5px">
-                        SCADA ПНС & КНФС
-                    </Typography>
-                </Hidden>
+                <Typography variant="h4" component="p" marginTop="15px">
+                    SCADA CARD
+                </Typography>
                 <Grid item xs={12}>
                     {!respone ? (
                         <Typography variant="h1">Load data</Typography>
@@ -36,7 +34,7 @@ function MainPage() {
                                     display="flex"
                                     align-items='center'
                                     justifyContent="center"
-                                    item key={sensorItem.Station_id} xs={12} sm={6} md={4}>
+                                    item key={sensorItem.Station_id} xs={12} sm={6} md={2}>
                                     <Box sx={{ maxWidth: 350, width: '100%' }}>
                                         <BasicCardItem sensorItemProps={sensorItem} />
                                     </Box>

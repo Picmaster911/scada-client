@@ -5,7 +5,7 @@ const controller = {
 };
 
 const controllerPut = {
-  put: (data) => axios.put(`http://93.127.20.110:8081/api/v1/user_put/`, data).then((data) => data),
+  put: (data) => axios.put(`http://217.24.162.58:8081/api/v1/user_put/`, data).then((data) => data),
 };
 const controllerPost = {
   post: (data, path) => axios.post(`/${path}`, data).then((data) => data),

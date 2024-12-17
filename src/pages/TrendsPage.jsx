@@ -27,7 +27,7 @@ function TrendsPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://93.127.20.110:8081/api/v1/trand/${sensorItem.Station_id}`);
+                const response = await fetch(`http://217.24.162.58:8081/api/v1/trand/${sensorItem.Station_id}`);
                 if (response.ok) {
                     const json = await response.json();
                     setData(json);
